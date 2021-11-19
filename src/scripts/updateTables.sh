@@ -1,0 +1,1 @@
+curl cache-nginx/scripts/reloadTables.php?tables=$TABLES_TO_UPDATE
