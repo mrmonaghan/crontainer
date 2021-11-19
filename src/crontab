@@ -1,5 +1,7 @@
 # define a default shell for cron and source the env vars captured in entrypoint.sh
 SHELL=/bin/bash
 BASH_ENV=/container.env
+
+# cronjob definitions
 */10 * * * * /scripts/exampleScript.sh >> /var/log/cron.log 2>&1
 # dont remove this comment or this will no longer be a valid cron file.
