@@ -1,13 +1,15 @@
 FROM php:8.0-cli
 
-RUN apt-get update && apt-get install -y cron curl
+# install cron and curl, and whatever other tooling you need.
+RUN apt-get update && \
+    apt-get install -y cron \
+                       curl
 
-# Add backup script
+# Add /scripts and set permissions
 RUN mkdir /scripts
 COPY ./src/scripts/ /scripts/
 RUN chmod -R +x /scripts
 
-# Configure the cron
 # Copy file to the cron.d directory
 COPY ./src/crontab /etc/cron.d/crontab
 
@@ -20,4 +22,5 @@ RUN crontab /etc/cron.d/crontab
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log
 
+# start entrypoint script.
 ENTRYPOINT ["bash","/scripts/entrypoint.sh"]
